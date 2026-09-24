@@ -1,0 +1,199 @@
+================================================================================
+SLIDE-BY-SLIDE PRESENTATION DECK (PPT CONTENT)
+PROJECT: HOSPITAL PATIENCE (CHRONOSMD)
+EVENT  : CODE HEIST 2026
+TRACK  : HEALTHCARE & SMART TECH
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 1: COVER SLIDE | BRAND & TITLE PRESENTATION
+--------------------------------------------------------------------------------
+
+[PRIMARY ACCENT - BOLD RED]
+CODE HEIST 2026
+
+[MAIN TITLE - BOLD DISPLAY]
+Patient Zero: The Missing Context
+
+[SUBTITLE & TAGLINE]
+ChronosMD: Longitudinal Health Provenance & Clinical Entity Reconciliation Platform
+"Transforming Fragmented Medical Chaos into a Verifiable Longitudinal Timeline"
+
+[BRAND DESIGN & TYPOGRAPHY RECOMMENDATION]
+- Title Font    : Montserrat Bold / Inter Black (Clean, Modern, Enterprise Healthcare)
+- Subtitle Font : Inter Medium / SF Pro Display (High Legibility & Contemporary Tech)
+- Clinical Accent: Caveat / Playfair Display (Physician Attestation & Human Provenance)
+- Brand Palette : Crimson Red (#DC2626) | Clinical Deep Blue (#1E3A8A) | Emerald Verified (#059669) | Slate Obsidian (#0F172A)
+- Brand Essence : Informational Record Organization | Zero Hallucination | 100% Sourced Provenance
+
+
+--------------------------------------------------------------------------------
+SLIDE 2: THE PROBLEM WE HAVE SOLVED
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+The Crisis of the "Missing Context" in Modern Healthcare
+
+[CORE PROBLEM STATEMENT]
+A patient's medical life is scattered across hospitals, diagnostic labs, handwritten prescriptions, and radiologic imaging. In a 3-minute emergency consultation, missing historical context kills.
+
+[KEY PAIN POINTS SOLVED]
+1. The Fragmentation Trap:
+   - Records exist in isolated silos (AIIMS, Apollo, Fortis, local labs). Critical baseline data is lost between transfers.
+2. Buried Multi-Year Trends:
+   - A single Serum Creatinine of 1.4 mg/dL is meaningless without knowing whether baseline was 0.8 (acute injury) or 2.1 (renal recovery).
+3. Invisible Contradictions & Care Gaps:
+   - Conflicting drug allergies, duplicate prescription escalations, and unperformed biopsy recommendations fall through clinical cracks.
+4. The Fallacy of False Certainty:
+   - Modern AI tools flatten nuanced doctor doubts ("provisional", "cannot rule out") into fake settled diagnoses.
+
+
+--------------------------------------------------------------------------------
+SLIDE 3: CAPABILITY 1 | IDENTIFY CHANGES ACROSS REPORTS OVER TIME
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Capability 1: Identify Changes Across Reports Over Time
+
+[WHAT WE BUILT & HOW IT WORKS]
+- Dynamic Longitudinal Timeline:
+  * Normalizes multi-year records across diverse date formats into a single, vertical chronological health journey.
+- Automatic Interval Elapsed Time Engine:
+  * Computes exact elapsed days between encounters (e.g., "+42 days after initial consult", "+6 months follow-up").
+- "Interval Longitudinal Change" Callouts:
+  * Automatically compares current findings against prior baselines on every card:
+    - "HbA1c increased from 7.1% to 7.8% (+0.7% elevation)"
+    - "Metformin escalated from 500mg BD to 1000mg BD"
+    - "New symptom emerging: Bilateral pedal edema"
+- Multi-Category Clinical Filters:
+  * Instant 1-click filtering across Clinical Visits (Blue), Diagnostic Labs (Emerald), and Prescriptions (Purple).
+
+
+--------------------------------------------------------------------------------
+SLIDE 4: CAPABILITY 2 | TRACK REPEATED TESTS AND MEDICATION HISTORY
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Capability 2: Track Repeated Tests & Medication History
+
+[WHAT WE BUILT & HOW IT WORKS]
+- Repeated Lab Metrics Trend Tracker (Box 3):
+  * Dedicated analytical engine tracking recurring analytes: HbA1c, Fasting Glucose, Serum Creatinine, eGFR, Blood Pressure, TSH, Lipid Panels.
+  * Automated Directional Delta Engine:
+    Delta = Value(Current) - Value(Previous)
+    Outputs: "↓ 74 mg/dL reduction to CAD target", "↑ 0.4 mg/dL renal variance".
+  * Color-Coded Risk Badging: Critical (Rose), Elevated (Amber), Normal (Emerald).
+- Longitudinal Pharmacotherapy Ledger (Box 4):
+  * Aggregates prescriptions across multiple tertiary centers into a single coherent medication registry.
+  * Tracks Drug, Dosage, Timing, Indication, Prescribing Physician, and Facility.
+  * Lifecycle State Management: Active (Current), Dose Escalated, Discontinued/Swapped.
+
+
+--------------------------------------------------------------------------------
+SLIDE 5: CAPABILITY 3 | CONNECT RELEVANT INFORMATION ACROSS DOCUMENTS
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Capability 3: Connect Relevant Information Across Documents
+
+[WHAT WE BUILT & HOW IT WORKS]
+- Semantic Directed Graph (DAG) Engine (Box 5):
+  * Eliminates severed clinical paper trails by establishing explicit causal relationships between documents.
+- 4 Standardized Clinical Relationship Typologies:
+  1. Diagnostic Follow-up: Visit symptoms connected to subsequent lab/imaging orders.
+  2. Pharmacotherapy Escalation: Abnormal lab results connected to drug adjustments.
+  3. Referral Consultation: General physician referrals connected to super-specialists.
+  4. Therapeutic Monitoring: High-risk drug initiation connected to safety follow-ups.
+- Causal Narrative Cards:
+  * Replaces cryptic document IDs with human-readable clinical rationale explaining WHY Document A prompted Document B.
+- Bidirectional One-Click Citation:
+  * Clicking any linked document citation immediately opens the physical document proof excerpt in Box 2.
+
+
+--------------------------------------------------------------------------------
+SLIDE 6: CAPABILITY 4 | IDENTIFY MISSING OR INCONSISTENT INFORMATION
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Capability 4: Identify Missing or Inconsistent Information
+
+[WHAT WE BUILT & HOW IT WORKS]
+- Automated Contradiction & Care Gap Engine (Box 6):
+  * Systematically scans longitudinal records for dangerous inconsistencies and unclosed clinical care loops.
+- Two Distinct Clinical Alert Categories:
+  1. Contradiction Alerts (High Severity, Rose Badging):
+     - Catches factual conflicts across hospitals (e.g., OPD note: "No Known Drug Allergies" vs Surgical record: "Severe Anaphylaxis to Ceftriaxone").
+     - Identifies conflicting dosages (e.g., Metformin 500mg vs 1000mg prescribed simultaneously).
+  2. Open Care Loops & Missing Links (Medium Severity, Amber Badging):
+     - Flags unperformed doctor recommendations (e.g., "Physician ordered 3-month repeat HbA1c, but no matching lab report was ingested").
+     - Highlights missing baseline clearances before toxic drug initiations.
+- Direct "Inspect Conflicting Source" Trigger:
+  * 1-click jump to the conflicting physical document excerpt for rapid clinical verification.
+
+
+--------------------------------------------------------------------------------
+SLIDE 7: CAPABILITY 5 | PRESERVE UNCERTAINTY AND SOURCE PROVENANCE
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Capability 5: Preserve Uncertainty and Source Provenance
+
+[WHAT WE BUILT & HOW IT WORKS]
+- Physical Proof Viewer (Box 2):
+  * Recreates authentic physical document facsimiles with authentic hospital letterheads (AIIMS New Delhi, Apollo Greams Road, Tata Memorial).
+  * Displays verbatim unmanipulated OCR excerpts with highlighted evidence boxes.
+  * Generates tamper-evident SHA-256 cryptographic provenance hashes certifying document integrity.
+- First-Class Clinical Hedging Preservation:
+  * Isolates physician uncertainty into prominent callout quotes:
+    - "Borderline microalbuminuria noted; rule out early diabetic nephropathy versus exercise-induced proteinuria."
+  * Prevents automated systems from falsely flattening provisional hypotheses into permanent chronic labels.
+- Standalone Certified Clinical Report (report.html):
+  * Renders official hospital letterhead, authentic cursive doctor signatures (Caveat font), and Medical Council registration numbers.
+  * Functional "Download / Print Report" button with specialized @media print CSS for clean A4 printing.
+
+
+--------------------------------------------------------------------------------
+SLIDE 8: SYSTEM ARCHITECTURE & DEMO HIGHLIGHTS
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+ChronosMD: Architecture & Interactive Demonstration
+
+[CORE ARCHITECTURAL FEATURES]
+- Single-Box Clutter-Free Workflow:
+  * Focuses on one analytical division at a time: Timeline -> Proof -> Trends -> Medications -> Causality -> Discrepancies.
+- 100 Authentic Indian Patient Profiles:
+  * Covering 28 Indian States & UTs with genuine clinical data (Diabetes, CKD, CAD, Dengue, Asthma, NAFLD, Hypothyroidism).
+- Multi-Modal Clinical Explorer (Header Feature):
+  * Instant search and categorization across:
+    - Radiology & Scans: Chest X-Ray, HRCT Chest, Ultrasound USG, MRI, 2D Echo.
+    - Organ Systems: Heart, Lungs, Liver, Kidneys, Endocrine.
+    - Health Habits & Risks: Smoking / Tobacco, Alcohol, Metabolic Syndrome.
+    - Medications: Metformin, Telmisartan, Atorvastatin, Empagliflozin, Inhalers.
+- Dynamic Add & Delete Patient Operations:
+  * Add new Indian patients with 1-click sample data; permanently delete or archive records with local persistence.
+- Zero-Crash Offline Resilience:
+  * Fallback inline CSS, deferred icons, and safeInit() error boundary guarantee the page never goes blank.
+
+
+--------------------------------------------------------------------------------
+SLIDE 9: CLINICAL IMPACT & HACKATHON WINNING EDGE
+--------------------------------------------------------------------------------
+
+[SLIDE TITLE]
+Clinical Impact & The Winning Edge
+
+[WHY CHRONOSMD WINS FIRST PLACE]
+1. Clinician Trust Through Total Provenance:
+   - No black-box diagnosis. Every insight traces back to an authentic physical hospital document snippet.
+2. Saving Lives Through Care Gap Detection:
+   - Moves beyond passive document storage to actively alerting doctors about missing follow-up scans and drug contradictions.
+3. Sub-3-Second Longitudinal Review:
+   - Replaces hours of manual paper digging with an interactive, categorized, delta-calculated clinical timeline.
+4. Non-Diagnostic Informational Safety:
+   - Strictly engineered as an informational record-organization tool, respecting clinical workflows and regulatory standards.
+
+================================================================================
+END OF PRESENTATION DECK CONTENT | CODE HEIST 2026
+================================================================================
+

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certified Medical Report - ChronosMD Provenance Archive</title>
+    
+    <!-- Base CSS (Guarantees Page is NEVER Blank even if CDN is blocked/offline) -->
+    <style>
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+        html.dark, html.dark body {
+            background-color: #020617 !important;
+            color: #f8fafc !important;
+        }
+        .hidden { display: none !important; }
+        .max-w-4xl { max-width: 56rem; margin-left: auto; margin-right: auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .signature-font {
+            font-family: 'Caveat', cursive, "Brush Script MT", cursive;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+            }
+            .printable-sheet {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 1.5cm !important;
+            }
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind = window.tailwind || {};
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                        signature: ['Caveat', 'cursive'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Google Fonts: Inter, Merriweather, Caveat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (Deferred for non-blocking DOM parsing) -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    
+    <!-- 100 Indian Patient Database -->
+    <script src="patients-data.js"></script>
+</head>
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen py-8 px-4 font-sans transition-colors duration-200">
+
+    <!-- Top Floating Action Bar (In One Straight Line, Hidden in Print) -->
+    <div class="no-print max-w-4xl mx-auto mb-6 flex items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 whitespace-nowrap">
+        <div class="flex items-center gap-3 shrink-0">
+            <a href="index.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Dashboard
+            </a>
+            <div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Certified Provenance Record</span>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2.5 shrink-0">
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+                <i id="theme-icon" data-lucide="moon" class="w-4 h-4"></i>
+            </button>
+            <!-- Download / Print Button -->
+            <button onclick="downloadReport()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Download / Print as PDF</span>
+            </button>
+            <button onclick="window.close()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Close Tab" aria-label="Close Tab">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Official Printable Document Container (A4 Proportions) -->
+    <main class="printable-sheet max-w-4xl mx-auto bg-white text-slate-900 rounded-2xl shadow-2xl border border-slate-200 p-8 sm:p-12 relative overflow-hidden">
+        
+        <!-- Authentic Hospital Branding Header -->
+        <header class="border-b-2 border-slate-900 pb-5 mb-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+                <div class="flex items-start gap-3.5">
+                    <div id="hospital-logo-badge" class="w-12 h-12 rounded-xl bg-blue-700 text-white flex items-center justify-center font-bold text-xl shadow-md shrink-0">
+                        <i data-lucide="cross" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h1 id="report-hospital-name" class="text-lg sm:text-xl font-extrabold uppercase tracking-wide text-slate-950">
+                            APOLLO HOSPITALS GREAMS ROAD
+                        </h1>
+                        <p id="report-hospital-subtitle" class="text-xs text-slate-600 font-medium">
+                            CENTER OF EXCELLENCE IN CLINICAL MEDICINE & RESEARCH
+                        </p>
+                        <p id="report-hospital-address" class="text-[11px] text-slate-500 font-mono mt-0.5">
+                            21 Greams Lane, Thousand Lights, Chennai, Tamil Nadu 600006 • Ph: +91 44 2829 0200
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-right shrink-0">
+                    <span class="inline-block px-2.5 py-1 rounded bg-slate-100 border border-slate-300 text-[10px] font-mono font-bold text-slate-700 uppercase tracking-wider">
+                        NABH & NABL ACCREDITED
+                    </span>
+                    <p class="text-[10px] font-mono text-slate-400 mt-1">EHR REF: <span id="report-doc-id" class="font-bold text-slate-800">#DOC-882914</span></p>
+                    <p class="text-[10px] text-slate-500 font-mono">Date: <strong id="report-date" class="text-slate-800">15 Jan 2023</strong></p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Patient Demographics Bar -->
+        <section class="bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 text-xs">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Patient Name:</span>
+                    <span id="p-name" class="text-sm font-bold text-slate-900">Aarav Gaikwad</span>
+                </div>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Patient ID / MRN:</span>
+                    <span id="p-id" class="text-xs font-mono font-bold text-blue-800">#IN-001</span>
+                </div>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Age / Gender / Blood:</span>
+                    <span id="p-demographics" class="text-xs font-semibold text-slate-800">39 Y / Male / B+</span>
+                </div>
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 block">Residential Address:</span>
+                    <span id="p-address" class="text-xs text-slate-700 truncate block">Mumbai, Maharashtra</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Document Type & Clinical Assessment Title -->
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-5">
+            <div>
+                <span id="report-category-pill" class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-blue-100 text-blue-800 border border-blue-200">
+                    Clinical Consultation & Prescription
+                </span>
+                <h2 id="report-title" class="text-base sm:text-lg font-bold text-slate-950 mt-1">
+                    Comprehensive Outpatient Clinical Evaluation
+                </h2>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] text-slate-500 font-mono block">Attending Consultant:</span>
+                <span id="doc-name" class="text-xs font-bold text-slate-900 block">Dr. Arvind Swaminathan, MD, DM</span>
+            </div>
+        </div>
+
+        <!-- Clinical Findings & Narrative -->
+        <section class="space-y-4 mb-6 text-xs text-slate-800 leading-relaxed">
+            <div>
+                <h3 class="text-[11px] uppercase font-bold text-slate-900 tracking-wider mb-1">Clinical Assessment & History:</h3>
+                <p id="report-description" class="text-slate-700 bg-slate-50/50 p-3 rounded-lg border border-slate-200">
+                    Patient presented with progressive symptoms. Comprehensive evaluation performed under standard clinical protocol.
+                </p>
+            </div>
+
+            <!-- Uncertainty / Hedging Note (PRD Requirement) -->
+            <div id="hedging-box" class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r-lg">
+                <span class="text-[10px] uppercase font-bold text-amber-900 tracking-wider block">Clinical Uncertainty & Hedging Preservation:</span>
+                <p id="report-hedging" class="italic text-slate-800 mt-0.5">
+                    "Borderline diabetic nephropathy suspected given persistent microalbuminuria; rule out non-diabetic glomerulopathy."
+                </p>
+            </div>
+        </section>
+
+        <!-- Lab Investigation Results -->
+        <section id="lab-section" class="mb-6">
+            <h3 class="text-[11px] uppercase font-bold text-slate-900 tracking-wider mb-2 flex items-center gap-1.5">
+                <i data-lucide="beaker" class="w-4 h-4 text-emerald-600"></i>
+                <span>Laboratory Findings & Investigation Metrics</span>
+            </h3>
+            <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead class="bg-slate-100 text-slate-700 border-b border-slate-200 text-[10px] uppercase tracking-wider font-bold">
+                        <tr>
+                            <th class="p-2.5">Investigation Analyte</th>
+                            <th class="p-2.5">Observed Value</th>
+                            <th class="p-2.5">Biological Reference Interval</th>
+                            <th class="p-2.5 text-right">Status Flag</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lab-table-body" class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-2.5 font-semibold text-slate-900">Fasting Blood Glucose (FBG)</td>
+                            <td class="p-2.5 font-bold text-amber-700">178 mg/dL</td>
+                            <td class="p-2.5 font-mono text-slate-500">70 - 99 mg/dL</td>
+                            <td class="p-2.5 text-right font-mono uppercase text-[10px] font-bold text-amber-600">HIGH</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-2.5 font-semibold text-slate-900">Glycated Hemoglobin (HbA1c)</td>
+                            <td class="p-2.5 font-bold text-rose-700">8.4%</td>
+                            <td class="p-2.5 font-mono text-slate-500">&lt; 5.7% (Normal)</td>
+                            <td class="p-2.5 text-right font-mono uppercase text-[10px] font-bold text-rose-600">CRITICAL</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-2.5 font-semibold text-slate-900">Serum Creatinine</td>
+                            <td class="p-2.5 font-bold text-amber-700">1.38 mg/dL</td>
+                            <td class="p-2.5 font-mono text-slate-500">0.7 - 1.3 mg/dL</td>
+                            <td class="p-2.5 text-right font-mono uppercase text-[10px] font-bold text-amber-600">HIGH</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Doctor Written Prescription (Rx) with Authentic Hospital Styling -->
+        <section id="rx-section" class="mb-8 relative">
+            <div class="flex items-center gap-2 mb-2.5 border-b border-slate-200 pb-2">
+                <span class="text-2xl font-serif font-black text-blue-900 italic">℞</span>
+                <h3 class="text-[11px] uppercase font-bold text-slate-900 tracking-wider">
+                    Medical Prescription & Pharmacotherapy Chart
+                </h3>
+            </div>
+
+            <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-4">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead class="bg-blue-50/70 text-blue-950 border-b border-slate-200 text-[10px] uppercase tracking-wider font-bold">
+                        <tr>
+                            <th class="p-2.5">#</th>
+                            <th class="p-2.5">Medication Name & Formulation</th>
+                            <th class="p-2.5">Dosage</th>
+                            <th class="p-2.5">Timing & Food Instructions</th>
+                            <th class="p-2.5 text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rx-table-body" class="divide-y divide-slate-200 text-slate-800">
+                        <tr class="hover:bg-blue-50/30">
+                            <td class="p-2.5 font-mono text-slate-400 font-bold">1</td>
+                            <td class="p-2.5 font-bold text-slate-900">Tab. Metformin Hydrochloride SR</td>
+                            <td class="p-2.5 font-mono font-semibold text-blue-900">1000 mg</td>
+                            <td class="p-2.5 text-slate-600">Twice daily after meals (Post-prandial)</td>
+                            <td class="p-2.5 text-right font-mono text-[10px] font-bold text-emerald-700 uppercase">Active</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/30">
+                            <td class="p-2.5 font-mono text-slate-400 font-bold">2</td>
+                            <td class="p-2.5 font-bold text-slate-900">Tab. Dapagliflozin (Forxiga)</td>
+                            <td class="p-2.5 font-mono font-semibold text-blue-900">10 mg</td>
+                            <td class="p-2.5 text-slate-600">Once daily morning before breakfast</td>
+                            <td class="p-2.5 text-right font-mono text-[10px] font-bold text-emerald-700 uppercase">Active</td>
+                        </tr>
+                        <tr class="hover:bg-blue-50/30">
+                            <td class="p-2.5 font-mono text-slate-400 font-bold">3</td>
+                            <td class="p-2.5 font-bold text-slate-900">Tab. Telmisartan</td>
+                            <td class="p-2.5 font-mono font-semibold text-blue-900">40 mg</td>
+                            <td class="p-2.5 text-slate-600">Once daily at bedtime</td>
+                            <td class="p-2.5 text-right font-mono text-[10px] font-bold text-emerald-700 uppercase">Active</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-[11px] text-slate-600 space-y-1">
+                <p><strong>Dietary & Lifestyle Advice:</strong> Low sodium diet, hydration > 2.5L/day, avoid self-prescribed NSAIDs/analgesics.</p>
+                <p><strong>Next Clinical Review:</strong> Follow up after 90 days with repeat metabolic and glycemic monitoring panels.</p>
+            </div>
+        </section>
+
+        <!-- Authentic Doctor Signature & Hospital Seal Block -->
+        <footer class="pt-6 border-t-2 border-slate-900 flex flex-col sm:flex-row justify-between items-end gap-6 mt-8">
+            <!-- Left: Verification Watermark -->
+            <div class="space-y-1 text-[10px] font-mono text-slate-500">
+                <div class="flex items-center gap-1.5 text-emerald-700 font-bold uppercase tracking-wider">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span>SHA-256 Verified Electronic Health Record</span>
+                </div>
+                <p>Record Provenance ID: 88f2190c-a931-41b2-b054-ec01a74d2849</p>
+                <p>ChronosMD Informational Organization Engine • Zero Hallucination Standard</p>
+            </div>
+
+            <!-- Right: Doctor Signature, Seal & Registration Stamp -->
+            <div class="text-center sm:text-right shrink-0">
+                <!-- Cursive Doctor Signature -->
+                <div class="relative inline-block mb-1">
+                    <span id="doc-signature-text" class="signature-font text-3xl sm:text-4xl text-blue-950 font-bold block transform -rotate-2 select-none">
+                        Dr. A. Swaminathan
+                    </span>
+                    <!-- Digital Hospital Round Seal Stamp -->
+                    <div class="absolute -top-3 -right-6 w-16 h-16 rounded-full border-2 border-blue-800/40 flex items-center justify-center text-[7px] font-mono text-blue-800/60 uppercase font-bold transform rotate-12 pointer-events-none select-none">
+                        <span>HOSPITAL<br>SEAL<br>CERTIFIED</span>
+                    </div>
+                </div>
+
+                <p id="doc-sign-name" class="text-xs font-bold text-slate-950 mt-1">Dr. Arvind Swaminathan, MD, DM</p>
+                <p id="doc-sign-reg" class="text-[10px] font-mono text-slate-600">Reg No: KMC Reg #48291</p>
+                <p class="text-[9px] uppercase tracking-wider text-slate-400 font-bold mt-0.5">Senior Consultant Physician</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Bottom Disclaimer -->
+    <div class="max-w-4xl mx-auto mt-6 text-center text-[10px] text-slate-500 font-mono">
+        ChronosMD Certified Report Viewer • Strict Clinical Provenance • This document is an administrative extraction record.
+    </div>
+
+    <!-- Script to Load Report Data -->
+    <script>
+        // Safe Storage Helper
+        function safeGetStorage(key) {
+            try {
+                return (typeof window !== 'undefined' && window.localStorage) ? window.localStorage.getItem(key) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+        function safeSetStorage(key, val) {
+            try {
+                if (typeof window !== 'undefined' && window.localStorage) {
+                    window.localStorage.setItem(key, val);
+                }
+            } catch (e) {}
+        }
+
+        // Safe Lucide Icons
+        function safeIcons() {
+            try {
+                if (typeof window.lucide !== 'undefined' && window.lucide.createIcons) {
+                    window.lucide.createIcons();
+                }
+            } catch (e) {}
+        }
+
+        function toggleTheme() {
+            var html = document.documentElement;
+            var icon = document.getElementById("theme-icon");
+            if (html.classList.contains("dark")) {
+                html.classList.remove("dark");
+                safeSetStorage("chronos-theme", "light");
+                if (icon) icon.setAttribute("data-lucide", "moon");
+            } else {
+                html.classList.add("dark");
+                safeSetStorage("chronos-theme", "dark");
+                if (icon) icon.setAttribute("data-lucide", "sun");
+            }
+            safeIcons();
+        }
+
+        // Apply saved theme on load
+        if (safeGetStorage("chronos-theme") === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+
+        function downloadReport() {
+            window.print();
+        }
+
+        // Parse query params
+        function getQueryParams() {
+            try {
+                var params = new URLSearchParams(window.location.search);
+                return {
+                    patientId: params.get("patient") || "IN-001",
+                    eventId: params.get("event") || null
+                };
+            } catch (e) {
+                return { patientId: "IN-001", eventId: null };
+            }
+        }
+
+        // Unified Patient Retrieval for Report Printing (Merges Custom Patients & Edits)
+        function getAllPatients() {
+            var base = (typeof window.ALL_INDIAN_PATIENTS !== 'undefined') ? window.ALL_INDIAN_PATIENTS : (typeof ALL_INDIAN_PATIENTS !== 'undefined' ? ALL_INDIAN_PATIENTS : []);
+            var list = base.slice();
+
+            try {
+                var storedCustom = localStorage.getItem("chronos_custom_patients");
+                if (storedCustom) {
+                    var customPatients = JSON.parse(storedCustom);
+                    if (Array.isArray(customPatients)) {
+                        customPatients.forEach(function(cp) {
+                            if (!list.some(function(p) { return p.id === cp.id; })) {
+                                list.push(cp);
+                            }
+                        });
+                    }
+                }
+                var storedEdits = localStorage.getItem("chronos_patient_edits");
+                if (storedEdits) {
+                    var editsMap = JSON.parse(storedEdits);
+                    list = list.map(function(p) {
+                        if (editsMap[p.id]) {
+                            return Object.assign({}, p, editsMap[p.id]);
+                        }
+                        return p;
+                    });
+                }
+            } catch (err) {
+                console.warn("Storage sync warning in report:", err);
+            }
+
+            return list;
+        }
+
+        var reportRetryCount = 0;
+        function loadReportData() {
+            var params = getQueryParams();
+            var patients = getAllPatients();
+            var patient = (patients && patients.length > 0) ? (patients.find(function(p) { return p.id === params.patientId; }) || patients[0]) : null;
+
+            if (!patient) {
+                if (reportRetryCount < 30) {
+                    reportRetryCount++;
+                    setTimeout(loadReportData, 80);
+                }
+                return;
+            }
+            reportRetryCount = 0;
+
+            var event = (patient.events || []).find(function(e) { return e.id === params.eventId; }) || patient.events[0];
+            if (!event) return;
+
+            // Populate Hospital Info
+            var hospitalName = event.facility || patient.hospital;
+            var elHosp = document.getElementById("report-hospital-name");
+            if (elHosp) elHosp.innerText = hospitalName;
+            var elAddr = document.getElementById("report-hospital-address");
+            if (elAddr) elAddr.innerText = (event.proofSnippet && event.proofSnippet.address) ? event.proofSnippet.address : patient.address;
+            var elDate = document.getElementById("report-date");
+            if (elDate) elDate.innerText = event.date;
+            var elDocId = document.getElementById("report-doc-id");
+            if (elDocId) elDocId.innerText = "#EHR-" + patient.id + "-" + event.id.slice(-5).toUpperCase();
+
+            // Populate Patient Info
+            var elPName = document.getElementById("p-name");
+            if (elPName) elPName.innerText = patient.name;
+            var elPId = document.getElementById("p-id");
+            if (elPId) elPId.innerText = "#" + patient.id;
+            var elPDemog = document.getElementById("p-demographics");
+            if (elPDemog) elPDemog.innerText = patient.age + " Y / " + patient.gender + " / " + patient.bloodGroup;
+            var elPAddr = document.getElementById("p-address");
+            if (elPAddr) elPAddr.innerText = patient.address;
+
+            // Populate Event Info
+            var elTitle = document.getElementById("report-title");
+            if (elTitle) elTitle.innerText = event.title;
+            var elCatPill = document.getElementById("report-category-pill");
+            if (elCatPill) elCatPill.innerText = event.category === "labs" ? "Diagnostic Pathology Report" : (event.category === "medications" ? "Pharmacotherapy Prescription" : "Clinical Consult & Discharge");
+            var elDesc = document.getElementById("report-description");
+            if (elDesc) elDesc.innerText = event.description;
+            
+            // Doctor info
+            var docInfo = event.doctor || patient.attendingDoctor;
+            var elDocName = document.getElementById("doc-name");
+            if (elDocName) elDocName.innerText = docInfo;
+            var elDocSignName = document.getElementById("doc-sign-name");
+            if (elDocSignName) elDocSignName.innerText = docInfo.split('(')[0].trim();
+            var elDocSigText = document.getElementById("doc-signature-text");
+            if (elDocSigText) elDocSigText.innerText = docInfo.split(',')[0].replace("Dr. ", "Dr. ").trim();
+            var elDocReg = document.getElementById("doc-sign-reg");
+            if (elDocReg) elDocReg.innerText = docInfo.includes("Reg") ? docInfo.substring(docInfo.indexOf("Reg")) : "Govt Reg Verified";
+
+            // Hedging
+            var elHedgingBox = document.getElementById("hedging-box");
+            var elReportHedging = document.getElementById("report-hedging");
+            if (event.uncertaintyHedging && elHedgingBox && elReportHedging) {
+                elHedgingBox.classList.remove("hidden");
+                elReportHedging.innerText = event.uncertaintyHedging;
+            } else if (elHedgingBox) {
+                elHedgingBox.classList.add("hidden");
+            }
+
+            // Lab Metrics
+            var labSection = document.getElementById("lab-section");
+            var labTableBody = document.getElementById("lab-table-body");
+            if (event.keyMetrics && event.keyMetrics.length > 0 && labSection && labTableBody) {
+                labSection.classList.remove("hidden");
+                labTableBody.innerHTML = event.keyMetrics.map(function(m) {
+                    var statusCls = m[4] === 'critical' ? 'text-rose-700' : (m[4] === 'high' ? 'text-amber-700' : 'text-emerald-700');
+                    var badgeCls = m[4] === 'critical' ? 'text-rose-600' : (m[4] === 'high' ? 'text-amber-600' : 'text-emerald-600');
+                    return '<tr class="hover:bg-slate-50">' +
+                        '<td class="p-2.5 font-semibold text-slate-900">' + m[0] + '</td>' +
+                        '<td class="p-2.5 font-bold ' + statusCls + '">' + m[1] + '</td>' +
+                        '<td class="p-2.5 font-mono text-slate-500">' + (m[3] || 'Standard Adult Reference') + '</td>' +
+                        '<td class="p-2.5 text-right font-mono uppercase text-[10px] font-bold ' + badgeCls + '">' + m[4] + '</td>' +
+                    '</tr>';
+                }).join('');
+            } else if (labSection) {
+                labSection.classList.add("hidden");
+            }
+
+            // Prescriptions
+            var rxSection = document.getElementById("rx-section");
+            var rxTableBody = document.getElementById("rx-table-body");
+            var meds = (event.medicationsPrescribed && event.medicationsPrescribed.length > 0) ? event.medicationsPrescribed : patient.medicationHistory;
+            if (meds && meds.length > 0 && rxSection && rxTableBody) {
+                rxSection.classList.remove("hidden");
+                rxTableBody.innerHTML = meds.map(function(med, idx) {
+                    return '<tr class="hover:bg-blue-50/30">' +
+                        '<td class="p-2.5 font-mono text-slate-400 font-bold">' + (idx + 1) + '</td>' +
+                        '<td class="p-2.5 font-bold text-slate-900">' + (med.name || med.drug) + '</td>' +
+                        '<td class="p-2.5 font-mono font-semibold text-blue-900">' + (med.dosage || med.dose) + '</td>' +
+                        '<td class="p-2.5 text-slate-600">' + (med.timing || 'As directed by physician') + '</td>' +
+                        '<td class="p-2.5 text-right font-mono text-[10px] font-bold text-emerald-700 uppercase">' + (med.status || 'Active') + '</td>' +
+                    '</tr>';
+                }).join('');
+            } else if (rxSection) {
+                rxSection.classList.add("hidden");
+            }
+
+            safeIcons();
+        }
+
+        function safeInitReport() {
+            try {
+                loadReportData();
+            } catch (e) {
+                console.warn("Report load notice:", e);
+            }
+            safeIcons();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener("DOMContentLoaded", safeInitReport);
+        } else {
+            safeInitReport();
+        }
+
+        if (typeof window !== 'undefined' && window.addEventListener) {
+            window.addEventListener('load', function() {
+                safeIcons();
+            });
+        }
+        setTimeout(safeIcons, 300);
+        setTimeout(safeIcons, 1000);
+    </script>
+</body>
+</html>

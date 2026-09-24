@@ -1,0 +1,408 @@
+================================================================================
+================================================================================
+                   [CODE HEIST 2026] - HACKATHON PRD
+          HEALTHCARE & SMART TECH : PATIENT ZERO (THE MISSING CONTEXT)
+================================================================================
+================================================================================
+
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
+PROJECT TITLE   : ChronosMD - Longitudinal Health Provenance & Entity Reconciliation
+TRACK / THEME   : Healthcare & Smart Tech (Code Heist 2026)
+PROBLEM TAG     : Patient Zero: The Missing Context
+VERSION         : 2.0.0 (Production-Grade Hackathon Specification)
+TARGET PLATFORM : Web Application (Responsive, Single-Box Workflow, Light/Dark)
+DATASET SCOPE   : 100 Authentic Indian Patient Profiles (28 States & UTs)
+REGULATORY SCOPE: Informational Record-Organization Tool (Non-Diagnostic Engine)
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS & 5-PAGE PRD ARCHITECTURE:
+--------------------------------------------------------------------------------
+PAGE 1: [CODE HEIST 2026] Brand Overview & REQUIREMENT 1
+        - Executive Vision & Anti-Hallucination Philosophy
+        - REQUIREMENT 1: Identify Changes Across Reports Over Time
+PAGE 2: REQUIREMENT 2: Track Repeated Tests and Medication History
+        - Longitudinal Lab Trend Engine & Delta Tracking
+        - Multi-Facility Medication & Pharmacotherapy History
+PAGE 3: REQUIREMENT 3: Connect Relevant Information Across Documents
+        - Cross-Document Entity Resolution & Semantic Linkage Graph
+        - Causal Clinical Narrative & Bidirectional Provenance
+PAGE 4: REQUIREMENT 4: Identify Missing or Inconsistent Information
+        - Automated Contradiction Detection Engine
+        - Gap Detection, Unresolved Follow-ups, and Clinical Ambiguity
+PAGE 5: REQUIREMENT 5: Preserve Uncertainty and Source Provenance
+        - Physical Document Proof Viewer & Cryptographic Verifiability
+        - Clinical Hedging Preservation & Signed Doctor Prescriptions
+        - Add Patient Registration & Dynamic Report Ingestion Specifications
+
+================================================================================
+PAGE 1 OF 5
+================================================================================
+
+--------------------------------------------------------------------------------
+1. BRAND IDENTITY & HACKATHON CONTEXT
+--------------------------------------------------------------------------------
+EVENT           : CODE HEIST 2026
+CHALLENGE TRACK : HEALTHCARE & SMART TECH
+CHALLENGE TITLE : Patient Zero: The Missing Context
+BRAND NAME      : ChronosMD (Chronos Medical Intelligence Platform)
+TAGLINE         : "Turning scattered medical chaos into a verifiable longitudinal timeline."
+
+1.1 THE CRISIS OF THE MISSING CONTEXT
+In India's fragmented healthcare ecosystem, patients navigate an uncoordinated
+maze of tertiary hospitals (AIIMS, Apollo, Fortis, Manipal), neighborhood
+clinics, municipal dispensaries, and independent pathology labs (Dr. Lal PathLabs,
+Metropolis, SRL). Over a lifetime, a chronic patient accumulates hundreds of
+physical papers:
+- Faded thermal printouts of ECGs and ultrasound summaries
+- Handwritten doctor prescriptions with illegible abbreviations
+- Multi-page digital pathology lab reports (PDFs)
+- Hospital discharge summaries with disparate diagnostic codings
+
+When a medical crisis occurs, the attending physician has less than 3 to 5 minutes
+to understand years of complex, interdependent clinical history. The missing
+context leads directly to:
+1. Accidental duplicate testing costing families thousands of rupees.
+2. Dangerous medication interactions and unrecognized contraindications.
+3. Unidentified progressive organ decline (e.g., creeping renal insufficiency).
+4. Loss of diagnostic hedging where preliminary hypotheses are wrongly treated as
+   settled facts.
+
+1.2 THE CHRONOSMD CORE PHILOSOPHY
+ChronosMD is strictly an INFORMATIONAL RECORD-ORGANIZATION PLATFORM.
+- ZERO HALLUCINATION: ChronosMD never invents data, predicts unverified diseases,
+  or attempts autonomous diagnosis.
+- 100% PROVENANCE ATTRIBUTION: Every event, metric, and medication is anchored
+  directly to a verified source document excerpt.
+- PRESERVATION OF UNCERTAINTY: Medical nuances, physician doubts, and hedging
+  language are treated as first-class citizens.
+
+1.3 HIGH-LEVEL SYSTEM PIPELINE
+  [DOCUMENTS] ---> [EXTRACTION] ---> [TIMELINE] ---> [RELATIONSHIPS] ---> [SOURCED INSIGHTS]
+   Multi-modal      OCR & Entity      Chronological    Cross-Document          Actionable Gaps,
+   Medical Docs     Parsing           Longitudinal     Causal Linkage          Trends & Sourced
+   (PDF/Scans)      (Meds/Labs/Rx)    History Graph    Graph (Visits/Labs)     Clinical Briefs
+
+--------------------------------------------------------------------------------
+REQUIREMENT 1: IDENTIFY CHANGES ACROSS REPORTS OVER TIME
+--------------------------------------------------------------------------------
+
+1.1 PROBLEM SPECIFICATION
+Single medical encounters are static snapshots. Human clinicians cannot easily
+mentally reconstruct the longitudinal curve of a patient's health trajectory
+when reading disconnected documents months or years apart. The platform must
+automatically detect, categorize, and visually display temporal changes across
+successive encounters.
+
+1.2 CHRONOSMD IMPLEMENTATION & CORE FEATURES
+
+A. Dynamic Longitudinal Timeline Engine
+   - Chronological Event Normalization: Parses disparate date formats (e.g.,
+     "14/05/2023", "Oct 12, 2022", "2024-01-08") into standardized ISO-8601
+     timestamps, rendering a unified, vertical chronological journey.
+   - Elapsed Interval Calculation: Automatically computes the exact duration
+     between successive medical encounters (e.g., "+42 days after initial consult",
+     "+6 months follow-up"), allowing clinicians to instantly recognize the tempo
+     of disease progression.
+
+B. Automated "Interval Change" Highlighting
+   - For every sequential encounter, ChronosMD compares key metrics and clinical
+     status against the preceding document.
+   - Generates an explicit "Interval Longitudinal Change" callout banner on the
+     timeline card (e.g., "HbA1c increased from 7.1% to 7.8% (+0.7%)", "Metformin
+     escalated from 500mg BD to 1000mg BD", "New symptom: Bilateral pedal edema").
+
+C. Multi-Category Filtering System
+   - Instant filtering across three distinct clinical categories:
+     1. Clinical Visits / Consultations (Blue badges)
+     2. Diagnostic Pathology Labs (Emerald badges)
+     3. Pharmacotherapy Prescriptions (Purple badges)
+   - Filter chips display live record counts (e.g., Visits: 2, Labs: 2, Prescriptions: 1).
+
+D. 100 Authentic Indian Patient Profiles
+   - Pre-loaded with 100 diverse, clinically realistic Indian patient profiles
+     spanning 28 Indian states and Union Territories (Maharashtra, Delhi, Tamil
+     Nadu, Karnataka, West Bengal, Kerala, Punjab, Gujarat, Uttar Pradesh, Telangana,
+     Assam, Rajasthan, etc.).
+   - Genuine medical conditions: Type 2 Diabetes Mellitus, Essential Hypertension,
+     Acute Coronary Syndrome, Chronic Kidney Disease Stage 3, Pulmonary Tuberculosis,
+     Hashimoto's Thyroiditis, Dengue Fever with Thrombocytopenia, COPD, and more.
+   - Contains over 500 structured timeline events, 200 longitudinal lab metrics,
+     300 medication histories, and 200 documented discrepancies.
+
+E. Dynamic "Add Report" Timeline Injection
+   - Clinicians can inject a new clinical document directly into the patient's
+     active timeline using the "+ Add Report" modal.
+   - The engine automatically recalculates interval elapsed times, updates category
+     counters, and scrolls directly to the newly synthesized event node.
+
+================================================================================
+PAGE 2 OF 5
+================================================================================
+
+================================================================================
+REQUIREMENT 2: TRACK REPEATED TESTS AND MEDICATION HISTORY
+================================================================================
+
+2.1 PROBLEM SPECIFICATION
+In chronic disease management (Diabetes, Renal Failure, Dyslipidemia, Thyroid
+Disorders), an isolated laboratory value is clinically meaningless without its
+temporal trajectory. A Serum Creatinine of 1.4 mg/dL represents improvement if the
+prior reading was 2.1 mg/dL, but signals acute kidney injury if the baseline was
+0.8 mg/dL. Similarly, patients frequently visit different specialists who modify,
+substitute, or escalate drugs without a single unified medication ledger.
+
+2.2 CHRONOSMD IMPLEMENTATION & CORE FEATURES
+
+A. BOX 3: Repeated Lab Metrics Trend Tracker
+   ChronosMD dedicates an entire focused analytical division (Box 3) to tracking
+   recurring biochemical and physical analytes across time:
+   - Tracked Biomarkers:
+     * Glycated Hemoglobin (HbA1c %)
+     * Fasting & Post-Prandial Blood Glucose (mg/dL)
+     * Serum Creatinine (mg/dL) & Estimated GFR (mL/min/1.73m2)
+     * Systolic & Diastolic Blood Pressure (mmHg)
+     * Serum Thyroid Stimulating Hormone (TSH uIU/mL)
+     * Total Cholesterol, LDL-C, Triglycerides (mg/dL)
+     * Complete Blood Count: Platelets, Hemoglobin, TLC
+
+B. Algorithmic Delta & Directional Variance Engine
+   - Calculates exact numerical variance between consecutive tests:
+     Delta = Value(Current) - Value(Previous)
+   - Formats human-readable delta indicators:
+     * "+0.7% (Elevated / Deteriorating)"
+     * "-0.3 mg/dL (Renal Function Improvement)"
+     * "+14 mg/dL (Interval Glycemic Spike)"
+   - Color-Coded Clinical Status Badging:
+     * CRITICAL (Rose theme): Exceeds acute clinical panic thresholds.
+     * ELEVATED / HIGH (Amber theme): Outside standard adult reference interval.
+     * NORMAL / CONTROLLED (Emerald theme): Within physiologic target ranges.
+   - Visual Progress Bars: Normalized horizontal progress bars mapping measured
+     values against biological reference bounds.
+
+C. BOX 4: Longitudinal Pharmacotherapy & Prescription History
+   ChronosMD aggregates every prescription into a longitudinal medication registry
+   (Box 4), organizing prescriptions across multiple healthcare facilities:
+   - Structured Medication Attributes:
+     * Generic & Brand Drug Name (e.g., "Tab. Metformin 500mg", "Tab. Telmisartan 40mg")
+     * Prescribed Strength & Exact Dosage
+     * Direction & Timing (e.g., "1 tablet twice daily after meals", "OD empty stomach")
+     * Clinical Indication (e.g., "First-line glycemic control", "Nephroprotection")
+     * Prescribing Physician & Institutional Facility
+     * Start Date & Discontinuation / Escalation Timestamps
+   - Lifecycle Status Tracking:
+     * ACTIVE (Emerald badge): Currently ongoing pharmacotherapy.
+     * DOSE ESCALATED (Blue badge): Dose increased following abnormal lab findings.
+     * DISCONTINUED / SWAPPED (Slate badge): Deprecated or replaced due to adverse
+       effects or clinical escalation.
+
+D. Dynamic Synchronization via Add Report Engine
+   - When a user submits a new lab report in the "+ Add Report" modal with analyte
+     details (e.g., "HbA1c: 8.2%"), ChronosMD automatically:
+     1. Matches the analyte against existing entries in repeatedMetrics.
+     2. Appends the new data point with date and calculated delta variance.
+     3. If the analyte is brand-new, dynamically initializes a new longitudinal
+        tracker entry.
+   - When a user submits a medication (e.g., "Tab. Empagliflozin 10mg OD"),
+     ChronosMD registers the drug into the patient's active medication history,
+     updating Box 4 live with zero page reloads.
+
+================================================================================
+PAGE 3 OF 5
+================================================================================
+
+================================================================================
+REQUIREMENT 3: CONNECT RELEVANT INFORMATION ACROSS DOCUMENTS
+================================================================================
+
+3.1 PROBLEM SPECIFICATION
+Medical documents do not exist in isolation. A consultation note on May 1st orders
+a blood test; the blood test performed on May 3rd reveals elevated enzymes; this
+prompts an ultrasound on May 10th; which culminates in a surgical referral on
+May 15th. In standard EHR systems and paper files, these causal linkages are severed,
+forcing human reviewers to guess why a test was ordered or why a medication was
+abruptly stopped.
+
+3.2 CHRONOSMD IMPLEMENTATION & CORE FEATURES
+
+A. BOX 5: Cross-Document Entity Resolution & Provenance Graph
+   ChronosMD models medical records as a Semantic Directed Acyclic Graph (DAG),
+   explicitly mapping relationships between discrete clinical encounters:
+   - Node: Individual Document / Event (e.g., "IND-PAT-001-EVT-01")
+   - Edge: Directed Relationship with Clinical Typology and Provenance Rationale
+
+B. Clinical Relationship Typologies
+   ChronosMD recognizes four core relationship classes:
+   1. DIAGNOSTIC FOLLOW-UP:
+      Links clinical consultation findings or symptoms directly to subsequent
+      pathology or imaging orders (e.g., "Consultation on 12 Jan noted bilateral
+      pedal edema; prompted Renal Function Panel on 15 Jan").
+   2. PHARMACOTHERAPY ESCALATION / ADJUSTMENT:
+      Links abnormal diagnostic results to subsequent prescription changes
+      (e.g., "HbA1c rising to 7.8% prompted addition of Tab. Empagliflozin 10mg
+      in subsequent endocrinology consult").
+   3. REFERRAL CONSULTATION:
+      Connects general physician encounters to super-specialty interventions
+      (e.g., "Internal Medicine consult referred patient to Cardiology following
+      borderline Troponin-T levels").
+   4. THERAPEUTIC MONITORING:
+      Links initiated medication regimens to scheduled safety tests (e.g.,
+      "Initiation of Statin therapy connected to 3-month follow-up Liver Function Test").
+
+C. Explanatory Causal Narratives
+   - Rather than displaying abstract IDs, Box 5 renders rich, human-readable
+     cards detailing the clinical reasoning connecting Document A to Document B.
+   - Displays source document tag (`fromEventId`) pointing to destination document
+     tag (`toEventId`) with full contextual narrative.
+
+D. Bidirectional Cross-Document Navigation
+   - Every relationship card includes interactive citation triggers.
+   - Clicking on any linked document citation instantly switches the interface
+     to Box 2 (Physical Proof Viewer), displaying the exact physical excerpt
+     of the linked document with highlighted text.
+
+E. Dynamic Relationship Creation via Add Report Modal
+   - When a new document is added, the user can select an existing prior document
+     from a dynamic dropdown and assign a relationship class (Diagnostic Follow-up,
+     Medication Escalation, Referral).
+   - The engine automatically establishes the bidirectional graph edge, updates
+     Box 5 immediately, and stores the relationship persistently.
+
+================================================================================
+PAGE 4 OF 5
+================================================================================
+
+================================================================================
+REQUIREMENT 4: IDENTIFY MISSING OR INCONSISTENT INFORMATION
+================================================================================
+
+4.1 PROBLEM SPECIFICATION
+Medical errors, diagnostic delays, and adverse drug events are rarely caused by a
+lack of data; they are caused by unrecognized inconsistencies across conflicting
+documents. For example, a hospital discharge summary states "No Known Allergies"
+while an older surgical record lists "Severe Anaphylaxis to Penicillin". Similarly,
+recommendations made in doctor notes (e.g., "Repeat USG in 6 months") frequently
+fall through the cracks because no system tracks unclosed loops.
+
+4.2 CHRONOSMD IMPLEMENTATION & CORE FEATURES
+
+A. BOX 6: Automated Contradictions & Clinical Uncertainty Engine
+   ChronosMD provides a dedicated analytical division (Box 6) that systematically
+   audits the longitudinal record for factual discrepancies, care gaps, and
+   conflicting clinical statements.
+
+B. Two Distinct Clinical Alert Categories
+
+   1. CONTRADICTION ALERTS (High Severity, Rose Theme, `alert-triangle` icon):
+      - Represents direct factual contradictions between two or more documents.
+      - Examples detected in ChronosMD patient profiles:
+        * Discordant Diagnoses: Outpatient note diagnoses "Mild Stage 1 Hypertension",
+          while inpatient summary simultaneously records "Patient normotensive without
+          antihypertensives".
+        * Incompatible Medication Dosages: Prescription lists Metformin 500mg BD,
+          while discharge summary specifies Metformin 1000mg OD.
+        * Allergy Discrepancies: Inconsistent drug sensitivity reporting between
+          admission records and anesthesiology clearances.
+      - Severity Badge: `HIGH RISK` with rose-bordered callout.
+
+   2. MISSING CARE LINKS & OPEN CLINICAL LOOPS (Medium Severity, Amber Theme, `git-branch` icon):
+      - Represents recommended clinical actions that have no corresponding
+        documentary proof in subsequent timeline events.
+      - Examples detected in ChronosMD patient profiles:
+        * Unperformed Diagnostic Follow-up: Physician note specifies "Repeat Serum
+          Creatinine and Electrolytes in 4 weeks", but no lab report was ingested
+          within that temporal window.
+        * Missing Baseline Clearance: ACE Inhibitor / ARB prescribed without documented
+          baseline serum potassium or renal function assessment.
+        * Unresolved Referral: Referral to Ophthalmologist for diabetic retinopathy
+          screening documented without subsequent fundoscopy report.
+      - Severity Badge: `MEDIUM / ATTENTION` with amber-bordered callout.
+
+C. Direct "Inspect Conflicting Source" Verification Trigger
+   - Every contradiction and care gap card features a one-click button:
+     "Inspect conflicting source document excerpt ->"
+   - Clicking this button immediately navigates to Box 2 (Physical Proof Viewer)
+     and loads the exact source document snippet where the discrepancy originated,
+     enabling clinicians to resolve contradictions with primary source truth.
+
+D. Dynamic Discrepancy Reporting in Add Report Modal
+   - When injecting a new document, the user can check "Flag Clinical Discrepancy /
+     Care Gap" to record conflicting observations or missing tests.
+   - The engine automatically appends the discrepancy to `patient.discrepancies`,
+     updates the Box 6 badge counter, and persists the record.
+
+================================================================================
+PAGE 5 OF 5
+================================================================================
+
+================================================================================
+REQUIREMENT 5: PRESERVE UNCERTAINTY AND SOURCE PROVENANCE
+================================================================================
+
+5.1 PROBLEM SPECIFICATION
+Modern automated systems and AI summaries frequently suffer from "false certainty"—
+they flatten nuanced clinical hedging (*"suspected," "rule out," "borderline"*) into
+definitive diagnoses, causing downstream clinicians to perpetuate diagnostic bias.
+Furthermore, clinicians will never trust an automated timeline unless every data
+point can be visually proven against the original physical hospital document.
+
+5.2 CHRONOSMD IMPLEMENTATION & CORE FEATURES
+
+A. BOX 2: Physical Document Proof Viewer (Split-Screen Provenance)
+   ChronosMD incorporates an interactive physical document facsimile viewer (Box 2):
+   - Authentic Indian Hospital Letterhead: Displays the originating facility (e.g.,
+     "ALL INDIA INSTITUTE OF MEDICAL SCIENCES (AIIMS), NEW DELHI", "APOLLO HOSPITALS,
+     GREAMS ROAD, CHENNAI", "TATA MEMORIAL HOSPITAL, MUMBAI").
+   - Physical Metadata: Page numbering ("Page 1 of 2"), institutional address,
+     and official confidentiality seals ("CERTIFIED CLINICAL UPLOAD", "OFFICIAL
+     PATHOLOGY SEAL").
+   - Verbatim Extracted OCR Text: Displays raw, unmanipulated text from the physical
+     document with highlighted excerpt boxes representing the exact primary evidence.
+   - Cryptographic Provenance Hash: Every document displays a simulated SHA-256
+     tamper-evident cryptographic verification string (e.g., "SHA-256: 4f8b9...c31e"),
+     certifying document integrity and audit trail provenance.
+
+B. First-Class Clinical Hedging & Uncertainty Preservation
+   - Rather than eliminating ambiguous phrasing, ChronosMD isolates and highlights
+     physician hedging in specialized italicized callouts:
+     * '"Borderline microalbuminuria noted; rule out early diabetic glomerulopathy
+        versus transient exercise-induced proteinuria."'
+     * '"Suspected subclinical hypothyroidism; repeat TSH with anti-TPO in 6 weeks
+        before permanent thyroxine commitment."'
+     * '"Ground glass opacity noted in right lower lobe; cannot definitively rule
+        out atypical viral pneumonitis versus organizing pneumonia."'
+   - Preserves diagnostic caution and prevents premature diagnostic anchoring.
+
+C. Standalone Printable Report Page (`report.html`)
+   - Every timeline event and proof record can be opened in a dedicated browser tab
+     via the "Open in New Page" action (`report.html?patient=...&event=...`).
+   - Official Clinical Presentation:
+     * High-resolution clinical header with hospital stamp and verification badge.
+     * Comprehensive patient demographic grid (Name, Age, Gender, Blood Group, Address).
+     * Official Rx Symbol and detailed Pharmacotherapy table.
+     * Full Laboratory Analyte Table with reference intervals and status tags.
+     * Authentic Doctor Signature in specialized cursive font (`Caveat`) alongside
+       official Medical Council Registration (e.g., "Dr. Rajesh Sharma, MD (AIIMS),
+       Reg: MCI-2009-0842 / DVA-9941").
+   - Production-Grade PDF Download / Print:
+     * Clean `@media print` CSS strips navigation buttons and background artifacts.
+     * Formats document to standard A4 printable dimensions for official sharing.
+
+D. Add Patient Registration System (Dynamic Profile Expansion)
+   - Clinicians can register brand-new Indian patient profiles via "+ Add Patient":
+     * Demographic Inputs: Name, Age, Gender, Blood Group, City, State, Full Address.
+     * Clinical Profile: Primary Diagnosis, Risk Level, Facility, Attending Doctor.
+     * Baseline Clinical Document: Initial title, category, lab analyte, medication,
+       hedging phrasing, and raw findings.
+   - Generates sequential patient ID (`IN-101`, `IN-102`, etc.), saves to
+     `localStorage.chronos_custom_patients`, updates header counters (`101 Patients`),
+     and renders immediately across all 6 analytical boxes.
+
+E. Informational Non-Diagnostic Guardrails
+   - Prominent UI disclaimer banners across both dashboard and report pages:
+     "IMPORTANT NOTICE: ChronosMD is an informational record-organization tool,
+     NOT an autonomous diagnostic system. All treatment and clinical decisions
+     must be validated by a licensed medical practitioner."
+
+================================================================================
+END OF PRD SPECIFICATION | CODE HEIST 2026 : PATIENT ZERO (CHRONOSMD)
+================================================================================
